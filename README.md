@@ -48,3 +48,36 @@ Outputs include `integrated_scores.csv`, `metrics.json`, `dcf_valuations.csv` an
 - DCF terminal value and WACC assumptions can dominate estimated equity value; use `sensitivity()` in `dcf.py`.
 - The combined score is a relative ranking, **not** a calibrated probability that a stock rises.
 - Model evaluation against synthetic data is a software demonstration, not an empirical U.S.-equities result.
+
+
+## Automated Summary Report (v0.3)
+
+Every pipeline run now generates:
+- `summary_report.md`: readable executive summary and company-by-company DCF, fundamental, credibility, predictability and weighted assessments.
+- `summary_report.json`: structured summaries suitable for downstream analysis.
+
+Run the synthetic software demonstration:
+
+```bash
+python fintruth.py --demo --output demo_results
+```
+
+Or supply point-in-time financial panels and DCF assumptions:
+
+```bash
+python fintruth.py --input your_point_in_time_panel.csv --dcf-input your_dcf_assumptions.csv --output results
+```
+
+Generate a report independently from previous results:
+
+```bash
+python report.py --scores results/integrated_scores.csv --dcf results/dcf_valuations.csv --metrics results/metrics.json --output results
+```
+
+If no DCF file exists, omit `--dcf`. The report will explicitly state that valuation information is unavailable rather than fabricate it. If the full three-agent composite is unavailable, the reporting engine abstains. Example output is **not an empirical investment recommendation**.
+
+Run the report tests alongside the valuation tests:
+
+```bash
+pytest -q
+```
