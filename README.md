@@ -81,3 +81,15 @@ Run the report tests alongside the valuation tests:
 ```bash
 pytest -q
 ```
+
+
+## Historical SEC/AAER Evidence Pipeline
+
+See [HISTORICAL_DATA.md](HISTORICAL_DATA.md) for compliant SEC EDGAR downloading, historical filing provenance, raw AAER index candidates, CIK matching, manually reviewed 20–30-company pilot registry, data-quality audit, and point-in-time backtesting interface. **The pilot has not yet been populated or validated.**
+
+```bash
+python historical_pipeline.py init-pilot --output pilot
+# Set SEC_USER_AGENT before live data downloads; see HISTORICAL_DATA.md
+python historical_pipeline.py collect --tickers AAPL,MSFT,JPM,GE --start 2005-01-01 --end 2025-12-31 --output sec_research
+pytest -q
+```
