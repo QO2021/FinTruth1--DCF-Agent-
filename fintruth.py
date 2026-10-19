@@ -214,6 +214,13 @@ def main():
     (out/'metrics.json').write_text(json.dumps({'data_type':'SYNTHETIC DEMO' if a.demo else 'USER-SUPPLIED',
                   'weights':{'valuation':cfg.valuation_weight,'credibility':cfg.credibility_weight,
                              'predictability':cfg.predictability_weight},'metrics':metrics},indent=2))
+    from report import generate_summary_report
+    report_metrics=json.loads((out/'metrics.json').read_text())
+    generate_summary_report(
+        scores=result, output_dir=out, dcf=dcf_results,
+        metrics=report_metrics, data_label=report_metrics['data_type']
+    )
+    print(f'Saved {out / "summary_report.md"} and {out / "summary_report.json"}')
     print((out/'metrics.json').read_text())
     print(f'Saved {out / "integrated_scores.csv"}')
 if __name__=='__main__': main()
