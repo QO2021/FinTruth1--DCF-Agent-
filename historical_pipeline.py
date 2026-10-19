@@ -175,7 +175,7 @@ def audit_ledger(ledger):
     good=ledger[list(required)].notna().all(axis=1)&ledger.reconciled.astype(str).str.lower().eq('true')
     duplicates=int(ledger.duplicated(['cik','accession']).sum())
     return {'total':len(ledger),'reviewed':int(good.sum()),'unreviewed':int((~good).sum()),
-            'duplicate_accessions':duplicates,'pass':bool(good.all() and duplicates==0)}
+            'duplicate_accessions':duplicates,'pass':bool(len(ledger)>0 and good.all() and duplicates==0)}
 
 def price_backtest(signals,prices,horizons=(1,5,21)):
     """Forward total-return targets; enter NEXT trading day strictly after signal date."""
