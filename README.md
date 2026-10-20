@@ -93,3 +93,17 @@ python historical_pipeline.py init-pilot --output pilot
 python historical_pipeline.py collect --tickers AAPL,MSFT,JPM,GE --start 2005-01-01 --end 2025-12-31 --output sec_research
 pytest -q
 ```
+
+
+## WRDS / CRSP CIZ data integration
+
+See [WRDS_CRSP.md](WRDS_CRSP.md) for read-only CRSP CIZ (v2) download using user-managed WRDS credentials, audited PERMNO linkage, delisting-inclusive daily returns, and local-only licensed outputs.
+
+```bash
+pip install wrds
+python wrds_crsp.py --inspect --out local_crsp_private
+# Only after verifying security identifiers:
+python wrds_crsp.py --permnos 14593,10107 --out local_crsp_private
+```
+
+Do **not** publish licensed CRSP data or WRDS credentials. CRSP CIZ daily returns include delisting; never add a separate legacy DLRET. No full 30-company empirical dataset has been validated yet.
