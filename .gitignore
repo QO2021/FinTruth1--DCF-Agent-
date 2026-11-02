@@ -9,3 +9,9 @@ demo_results/
 local_crsp_private/
 *.pgpass
 .wrds*
+
+# Local-only SEC/WRDS DCF assumptions and results
+local_dcf_results/
+local_financial.json
+local_assumptions.json
+local_market_returns.csv
