@@ -107,3 +107,8 @@ python wrds_crsp.py --permnos 14593,10107 --out local_crsp_private
 ```
 
 Do **not** publish licensed CRSP data or WRDS credentials. CRSP CIZ daily returns include delisting; never add a separate legacy DLRET. No full 30-company empirical dataset has been validated yet.
+
+
+## WRDS-linked historical DCF (SEC + CRSP)
+
+See [DCF_WRDS_GUIDE.md](DCF_WRDS_GUIDE.md) for secure local WRDS access, original-filing audit requirements, CAPM beta/WACC, DCF fair-value classification and WACC/terminal-growth sensitivity analysis. The [dcf_wrds_bridge.py](dcf_wrds_bridge.py) module refuses unaudited or future-dated financial inputs and requires a validated historical CIK–PERMNO mapping. This is a research prototype, not a validated 30-firm result. Never commit tokens, passwords or licensed CRSP data.
